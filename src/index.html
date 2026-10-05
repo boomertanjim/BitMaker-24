@@ -36,6 +36,7 @@
     <script>
       const c = document.querySelector("#c");
       const q = document.querySelector("h3");
+      const audio = new AudioContext();
       const x = c.getContext("2d");
 
       let currentStep = 0;
@@ -56,14 +57,78 @@
         });
 
         track[currentStep][3] = "red";
+        for (let i = 0; i < 3; i++) {
+          buttons[i].forEach((b, j) => {
+            if (b[2] && currentStep == j) {
+              playNote(i);
+            }
+          });
+        }
         currentStep++;
 
         if (currentStep >= 16) {
           currentStep = 0;
         }
-        setTimeout(playStep, 60000 / bpm);
+        setTimeout(playStep, 60000 / bpm / 4);
       }
+      function playNote(t) {
+        let o = audio.createOscillator(),
+          g = audio.createGain();
+        if (t == 0) {
+          o.frequency.setValueAtTime(180, audio.currentTime);
+          o.frequency.exponentialRampToValueAtTime(
+            0.01,
+            audio.currentTime + 0.2,
+          );
+          g.gain.setValueAtTime(0.5, audio.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.01, audio.currentTime + 0.2);
+          o.connect(g).connect(audio.destination);
+          o.start();
+          o.stop(audio.currentTime + 0.2);
+        } else if (t == 1) {
+          let b = audio.createBuffer(
+            1,
+            audio.sampleRate * 0.12,
+            audio.sampleRate,
+          );
+          let d = b.getChannelData(0);
+          for (let i = 0; i < d.length; i++) {
+            d[i] = Math.random() * 2 - 1;
+          }
+          let n = audio.createBufferSource();
+          let f = audio.createBiquadFilter();
 
+          f.type = "highpass";
+          f.frequency.value = 1200;
+          g.gain.setValueAtTime(0.25, audio.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.01, audio.currentTime + 0.12);
+
+          n.buffer = b;
+          n.connect(f).connect(g).connect(audio.destination);
+          n.start();
+        } else {
+          let b = audio.createBuffer(
+            1,
+            audio.sampleRate * 0.05,
+            audio.sampleRate,
+          );
+          let d = b.getChannelData(0);
+          for (let i = 0; i < d.length; i++) {
+            d[i] = Math.random() * 2 - 1;
+          }
+          let n = audio.createBufferSource();
+          let f = audio.createBiquadFilter();
+
+          f.type = "highpass";
+          f.frequency.value = 5000;
+          g.gain.setValueAtTime(0.12, audio.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.01, audio.currentTime + 0.05);
+
+          n.buffer = b;
+          n.connect(f).connect(g).connect(audio.destination);
+          n.start();
+        }
+      }
       function animate() {
         x.clearRect(0, 0, c.width, c.height);
         for (let i = 0; i < 3; i++) {
@@ -91,6 +156,7 @@
           buttons[i].forEach((b) => {
             if (m >= b[0] && m <= b[0] + 40 && n >= b[1] && n <= b[1] + 60) {
               b[3] = b[3] === "red" ? "grey" : "red";
+              b[2] = b[2] === true ? false : true;
             }
           });
         }
