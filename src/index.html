@@ -32,8 +32,10 @@
   <body>
     <canvas id="c" width="940" height="400"></canvas>
     <input type="range" id="s" min="40" max="240" value="120" />
+    <h3>120 BPM</h3>
     <script>
       const c = document.querySelector("#c");
+      const q = document.querySelector("h3");
       const x = c.getContext("2d");
 
       let currentStep = 0;
@@ -97,6 +99,7 @@
       playStep();
       s.oninput = (e) => {
         bpm = Number(e.target.value);
+        q.textContent = `${bpm} BPM`;
       };
       animate();
     </script>
