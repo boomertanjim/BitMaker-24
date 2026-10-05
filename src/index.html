@@ -42,6 +42,10 @@
           buttons[i].push([0 + j * 60, 0 + i * 100, false, "grey"]);
         }
       }
+      let track = [];
+      for (let i = 0; i < 16; i++) {
+        track.push([0 + i * 60, 280, false, "grey"]);
+      }
 
       function animate() {
         x.clearRect(0, 0, c.width, c.height);
@@ -53,6 +57,12 @@
             x.fill();
           });
         }
+        track.forEach((b) => {
+          x.beginPath();
+          x.roundRect(b[0], b[1], 40, 10, 7);
+          x.fillStyle = b[3];
+          x.fill();
+        });
         requestAnimationFrame(animate);
       }
       animate();
