@@ -31,11 +31,14 @@
   </head>
   <body>
     <canvas id="c" width="940" height="400"></canvas>
-    <input type="range" id="s" min="1" max="20" value="8" />
+    <input type="range" id="s" min="40" max="240" value="120" />
     <script>
       const c = document.querySelector("#c");
       const x = c.getContext("2d");
 
+      let currentStep = 0;
+      let bpm = 120;
+      let interval = 60000 / bpm;
       let buttons = [[], [], []];
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 16; j++) {
@@ -46,6 +49,18 @@
       for (let i = 0; i < 16; i++) {
         track.push([0 + i * 60, 280, false, "grey"]);
       }
+      setInterval(() => {
+        track.forEach((b) => {
+          b[3] = "grey";
+        });
+
+        track[currentStep][3] = "red";
+        currentStep++;
+
+        if (currentStep >= 16) {
+          currentStep = 0;
+        }
+      }, interval);
 
       function animate() {
         x.clearRect(0, 0, c.width, c.height);
@@ -65,6 +80,23 @@
         });
         requestAnimationFrame(animate);
       }
+      c.onclick = (e) => {
+        // audio.resume();
+        let m = e.offsetX;
+        let n = e.offsetY;
+
+        for (let i = 0; i < 3; i++) {
+          buttons[i].forEach((b) => {
+            if (m >= b[0] && m <= b[0] + 40 && n >= b[1] && n <= b[1] + 60) {
+              b[3] = b[3] === "red" ? "grey" : "red";
+            }
+          });
+        }
+      };
+
+      s.oninput = (e) => {
+        bpm = e.target.value;
+      };
       animate();
     </script>
   </body>
