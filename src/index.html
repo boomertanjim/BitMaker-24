@@ -38,7 +38,6 @@
 
       let currentStep = 0;
       let bpm = 120;
-      let interval = 60000 / bpm;
       let buttons = [[], [], []];
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 16; j++) {
@@ -49,7 +48,7 @@
       for (let i = 0; i < 16; i++) {
         track.push([0 + i * 60, 280, false, "grey"]);
       }
-      setInterval(() => {
+      function playStep() {
         track.forEach((b) => {
           b[3] = "grey";
         });
@@ -60,7 +59,8 @@
         if (currentStep >= 16) {
           currentStep = 0;
         }
-      }, interval);
+        setTimeout(playStep, 60000 / bpm);
+      }
 
       function animate() {
         x.clearRect(0, 0, c.width, c.height);
@@ -94,8 +94,9 @@
         }
       };
 
+      playStep();
       s.oninput = (e) => {
-        bpm = e.target.value;
+        bpm = Number(e.target.value);
       };
       animate();
     </script>
