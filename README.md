@@ -10,6 +10,8 @@ The sequencer features a 16 x 3 grid of buttons, allowing the user to create and
 
 ### Screenshots
 
+<img width="1920" height="874" alt="image" src="https://github.com/user-attachments/assets/eefc592d-63db-4ef7-b51d-17d63361162c" />
+
 ## How To Use
 
 - Copy the text from `dist/uri.txt` and paste it in the browser
@@ -55,3 +57,7 @@ node build.mjs
 ```
 
 The URI file and the shrunken `index.html` file will be made in the `dist` folder
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
