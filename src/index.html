@@ -78,21 +78,21 @@
         if (t == 0) {
           let n = audio.currentTime;
           o.type = "sine";
-          o.frequency.setValueAtTime(180, n);
-          o.frequency.exponentialRampToValueAtTime(50, n + 0.035);
-          g.gain.setValueAtTime(0.8, n);
-          g.gain.exponentialRampToValueAtTime(0.001, n + 0.25);
+          o.frequency.setValueAtTime(160, n);
+          o.frequency.exponentialRampToValueAtTime(45, n + 0.06);
+          g.gain.setValueAtTime(1.2, n);
+          g.gain.exponentialRampToValueAtTime(0.001, n + 0.28);
           o.connect(g).connect(audio.destination);
           o.start(n);
-          o.stop(n + 0.25);
+          o.stop(n + 0.28);
 
           let l = audio.createOscillator();
           let lg = audio.createGain();
 
           l.type = "triangle";
-          l.frequency.setValueAtTime(1200, n);
-          l.frequency.exponentialRampToValueAtTime(100, n + 0.01);
-          lg.gain.setValueAtTime(0.25, n);
+          l.frequency.setValueAtTime(900, n);
+          l.frequency.exponentialRampToValueAtTime(120, n + 0.012);
+          lg.gain.setValueAtTime(0.35, n);
           lg.gain.exponentialRampToValueAtTime(0.001, n + 0.025);
 
           l.connect(lg).connect(audio.destination);
