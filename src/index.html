@@ -57,7 +57,7 @@
           b[3] = "grey";
         });
 
-        track[currentStep][3] = "red";
+        track[currentStep][3] = "#DF301C";
         for (let i = 0; i < 3; i++) {
           buttons[i].forEach((b, j) => {
             if (b[2] && currentStep == j) {
@@ -168,7 +168,7 @@
         for (let i = 0; i < 3; i++) {
           buttons[i].forEach((b) => {
             if (m >= b[0] && m <= b[0] + 40 && n >= b[1] && n <= b[1] + 60) {
-              b[3] = b[3] === "red" ? "grey" : "red";
+              b[3] = b[3] === "#00B7CD" ? "grey" : "#00B7CD";
               b[2] = b[2] === true ? false : true;
             }
           });
