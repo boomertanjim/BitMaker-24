@@ -36,6 +36,7 @@
     <script>
       const c = document.querySelector("#c");
       const q = document.querySelector("h3");
+      const s = document.querySelector("#s");
       const audio = new AudioContext();
       const x = c.getContext("2d");
 
@@ -148,7 +149,7 @@
         requestAnimationFrame(animate);
       }
       c.onclick = (e) => {
-        // audio.resume();
+        audio.resume();
         let m = e.offsetX;
         let n = e.offsetY;
 
