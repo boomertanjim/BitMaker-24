@@ -16,7 +16,7 @@ The sequencer features a 16 x 3 grid of buttons, allowing the user to create and
 
 - Copy the text from `dist/uri.txt` and paste it in the browser
 
-- Each row of buttons represent Hi-Hat, Snare and kick from top to bottom
+- Each row of buttons represent Kick, Snare and Hi-Hat from top to bottom
 
 - Each row has 16 buttons that determine when to play the corresponding drum sound
 
@@ -31,9 +31,9 @@ The sequencer features a 16 x 3 grid of buttons, allowing the user to create and
 - Experiment with different kick, snare and hi-hat combination to create your own beats
 
 TLDR:
-Row 1 --> Hi-hat
-Row 1 --> Snare
 Row 1 --> Kick
+Row 1 --> Snare
+Row 1 --> Hi-Hat
 The controls are fully similar to any sequencer available in the internet
 
 ## Building From Source
